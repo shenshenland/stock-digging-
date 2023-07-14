@@ -1,0 +1,22 @@
+#base on the https://quote.eastmoney.com/SH601111.html internet data wash program
+#transfer the data from chinese to Englsih, try to find the relationship between main force on stock and the increase or decrease
+import openpyxl as opl
+
+pd_1 = opl.load_workbook(r"D:\sheet1.xlsx")
+wk_1 = pd_1['Sheet1']
+
+row = wk_1.max_row
+
+for i in range(4,14,2):
+    for r in range(1,row+1):
+        if '亿' in str(wk_1.cell(r,i).value):
+            wk_2 = wk_1.cell(r,i).value.replace('亿','')
+            wk_1.cell(r, i).value = float(wk_2)*100000000
+            print(wk_1.cell(r, i).value)
+            print('---')
+        if '万' in str(wk_1.cell(r, i).value):
+            wk_2 = wk_1.cell(r, i).value.replace('万', '')
+            wk_1.cell(r, i).value = float(wk_2) * 10000
+            print(wk_1.cell(r, i).value)
+
+pd_1.save(r'G:\output.xlsx')
