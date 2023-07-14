@@ -3,3 +3,4 @@ Since block trading reflects the inflow and outflow of institutional funds, anal
 
 The result is NOT WORK WELL when it comes to a daily trade -- t day we buy the stock as the large order comes and day_t+1 we sell it, here is the result. 
 
+1. issues that 
