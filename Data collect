@@ -1,0 +1,74 @@
+#python
+
+import openpyxl as opl
+import matplotlib.pyplot as plt
+from openpyxl.styles import Font, PatternFill
+#import certain package
+
+
+pd_1 = opl.load_workbook(r"G\UoB\output.xlsx")
+wk_1 = pd_1['Sheet1']
+
+row_1 = wk_1.max_row
+col_1 = wk_1.max_column
+#import excel file from internet
+
+def ser_name(x,wk,list):
+    for i in range(1,wk.max_column +1):
+        if x in wk.cell(1,i).value:
+            list.append(i)
+    return list
+#def title searching program in order to search for the title
+
+
+# time = []
+# price = []
+# vol = []
+# for i in range(3,row_1 + 1):
+#     time.append(wk_1.cell(i,1).value)
+#     price.append(wk_1.cell(i, 4).value)
+#     vol.append(wk_1.cell(i,9).value)
+#
+# fig, ax = plt.subplots()
+#
+# # 绘制折线图
+# ax.plot(time, vol, label='vol')
+# ax.plot(time, price, label='price')
+
+# draw line for excel
+
+# for row in range(2, wk_1.max_row+1):
+#     cell = wk_1.cell(row, 14)
+#     print(cell.value)
+#     print(cell.font.color.rgb)
+#     if cell.font.color.rgb == 'FFFF0000':
+#         print(cell.value)
+#         for c in range(1,col_1):
+#             wk_1.cell(row, c).fill = PatternFill(start_color='FFFF00', fill_type="solid")
+#
+#
+#     elif cell.font.color.rgb == '00FF00':
+#         pass
+
+#outline the picture yellow part of the graph
+
+
+positive = 0
+negative = 0
+for row in range(3, wk_1.max_row+1):
+    cell = wk_1.cell(row, 14)
+    if cell.value != None:
+        if int(cell.value) > 0 and cell.value != None:
+            if wk_1.cell(row - 1 , 3).value>0:
+                print(wk_1.cell(row - 1 , 3).value,wk_1.cell(row  , 3).value)
+                positive += wk_1.cell(row - 1 , 3).value
+            elif wk_1.cell(row - 1 , 3).value<0:
+                negative += wk_1.cell(row - 1, 3).value
+print(positive,negative)
+
+#calculate the rate of win
+#result 0.33130000000000004 -0.4841
+
+
+pd_1.save(r"G:\ssoutput.xlsx")
+#save the file
